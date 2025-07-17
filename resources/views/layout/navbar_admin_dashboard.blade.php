@@ -9,18 +9,15 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/admin_dashboard">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Manage Content
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/chest">Chest</a></li>
-            <li><a class="dropdown-item" href="/shoulder">Shoulder</a></li>
-            <li><a class="dropdown-item" href="/back">Back</a></li>
-            <li><a class="dropdown-item" href="/leg">Leg</a></li>
+            <li><a class="dropdown-item" href="/chest_manage">Chest</a></li>
+            <li><a class="dropdown-item" href="/shoulder_manage">Shoulder</a></li>
+            <li><a class="dropdown-item" href="/back_manage">Back</a></li>
+            <li><a class="dropdown-item" href="/leg_manage">Leg</a></li>
           </ul>
         </li>
       </ul>
