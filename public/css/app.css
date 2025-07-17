@@ -103,12 +103,11 @@
         padding-top: 20px;
     }
     .detail-exercise-img{
-        background-size: cover; /* Gunakan background-size: cover; untuk object-fit pada background-image */
-        background-position: center center; /* Opsional: untuk posisi tengah */
-        width: 30%;
-        background-repeat: no-repeat; /* Opsional: agar gambar tidak mengulang */
+        top: 60px;
+        position:relative; /* Opsional: untuk posisi tengah */
+        width: 50%;
+        height: 500px;
         /* Pastikan juga elemen ini memiliki tinggi (height) agar background terlihat */
-        min-height: 10x; /* Contoh, sesuaikan sesuai kebutuhan */
     }
     .detail-exercise-title{
         padding-top: 40px;

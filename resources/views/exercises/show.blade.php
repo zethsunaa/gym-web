@@ -10,7 +10,11 @@
 </head>
 <body>
     @extends('layout.navbar')
-    <img class="mx-auto text-center detail-exercise-img" src="{{ asset($exercise->img) }}" alt="{{ $exercise->name_exercise }}">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+                <img class="mx-auto detail-exercise-img" src="{{ asset($exercise->img) }}" alt="{{ $exercise->name_exercise }}">
+        </div>
+    </div>
     <div class="container">
         <div class="detail-exercise-container">
             <h1 class="detail-exercise-title">{{ $exercise->name_exercise }}</h1>
