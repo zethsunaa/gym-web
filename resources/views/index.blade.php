@@ -13,7 +13,6 @@
   @extends('layout.navbar')
 
     <div class="home-hero-container">
-      d
     </div>
 
   <div class="container">

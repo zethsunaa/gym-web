@@ -8,6 +8,7 @@ use App\Http\Controllers\ShoulderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ChestViewController;
+use App\Http\Controllers\ExerciseController;
 
 Route::get('/', function () {
     return view('index');
@@ -48,3 +49,4 @@ Route::post('/back_delete', [BackController::class,'delete_back']); // Tetap POS
 
 // User-facing Chest Exercises Route (New)
 Route::get('/exercises/chest', [ChestViewController::class, 'index']); // Rute untuk menampilkan latihan dada ke pengguna
+Route::get('/exercise/{categories}/{id}', [ExerciseController::class, 'show'])->name('exercise.show');
