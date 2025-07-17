@@ -35,7 +35,7 @@
                     @endif
                     <div class="card-body d-flex flex-column"> {{-- flex-column untuk tata letak konten card --}}
                         <h5 class="card-title">{{ $exercise->name_exercise }}</h5>
-                        <p class="card-text flex-grow-1">{{ Str::limit($exercise->description, 100) }}</p> {{-- Batasi deskripsi --}}
+                        <p class="card-text flex-grow-1">{!! Str::limit($exercise->description, 100) !!}</p> {{-- Batasi deskripsi --}}
                         <a href="{{ route('exercise.show', ['categories' => $exercise->categories, 'id' => $exercise->id]) }}" class="btn btn-primary mt-auto">View Details</a>                    </div>
                 </div>
             </div>

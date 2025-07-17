@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     <title>Admin - Gym Len</title>
 </head>
@@ -75,7 +76,7 @@
                     <tr>
                         <th scope="row">{{ $index + 1 }}</th>
                         <td>{{ $exercise->name_exercise }}</td>
-                        <td>{{ $exercise->description }}</td>
+                        <td>{!! $exercise->description !!}</td>
                         <td>{{ $exercise->created_date }}</td>
                         <td>{{ $exercise->created_by }}</td>
                         <td>{{ $exercise->updated_date }}</td>
@@ -148,6 +149,10 @@
             </table>
         </div>
     </div>
+    <script>
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('edit_description');
+    </script>
     <script src="{{ url('js/main.js') }}"></script>
 </body>
 </html>

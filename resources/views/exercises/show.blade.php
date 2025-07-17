@@ -14,7 +14,7 @@
     <div class="container">
         <div class="detail-exercise-container">
             <h1 class="detail-exercise-title">{{ $exercise->name_exercise }}</h1>
-            <p>{{ $exercise->description }}</p>
+            <p>{!! $exercise->description !!}</p>
             <p><strong>Category:</strong> {{ $exercise->categories }}</p>
         </div>
        
