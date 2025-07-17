@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon; // Import Carbon for current datetime
@@ -9,7 +10,7 @@ class ChestController extends Controller
 {
     public function read_chest(Request $request){
         $exercises = DB::table("content")
-                        ->where('categories', 'chest')
+                        ->where('categories', 'chest') // Filter by 'chest' category
                         ->get();
 
         return view("chest_manage", compact('exercises'));
@@ -19,45 +20,33 @@ class ChestController extends Controller
     try {
         $request->validate([
             'name_exercise' => 'required|string|max:100',
-            'description' => 'required|string', // Changed from deskripsi to description
-            // created_date, created_by, updated_date, updated_by will be set by the controller
+            'description' => 'required|string',
             'categories' => 'required|string|max:50',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' // Added gif and max size
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' 
         ]);
 
-        // Get the uploaded file
         $file = $request->file('img');
-        // Generate a unique filename using timestamp
         $filename = time() . '_' . $file->getClientOriginalName();
         
-        // Define the target directory within public
-        // Ensure this 'chest' directory exists in your 'public' folder
-        $tujuan_upload = 'chest';
-        
-        // Move the uploaded file to the target directory
+        $tujuan_upload = 'chest'; // Target directory for chest images
         $file->move(public_path($tujuan_upload), $filename);
 
-        // Prepare data for database insertion
         $currentDateTime = Carbon::now();
-        // You would typically get the authenticated user's ID/name here
-        // For demonstration, using a placeholder 'Admin'
-        $createdBy = 'Admin'; 
+        $createdBy = 'Admin'; // Replace with actual authenticated user or Auth::user()->name;
 
-        // Simpan ke database
         DB::table('content')->insert([
             'name_exercise' => $request->name_exercise,
             'description' => $request->description,
             'created_date' => $currentDateTime,
             'created_by' => $createdBy,
-            'updated_date' => $currentDateTime, // For initial insert, updated_date is same as created_date
-            'updated_by' => $createdBy, // For initial insert, updated_by is same as created_by
+            'updated_date' => $currentDateTime,
+            'updated_by' => $createdBy,
             'categories' => $request->categories,
-            'img' => $tujuan_upload . '/' . $filename, // Store the full path relative to public
+            'img' => $tujuan_upload . '/' . $filename, // Store full path relative to public
         ]);
 
-        return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->back()->with('success', 'Chest exercise added successfully!');
         } catch (\Exception $e) {
-            // Log the error for debugging purposes
             \Log::error('Error inserting chest exercise: ' . $e->getMessage());
             return redirect()->back()->withInput()->withErrors([
                 'insert_error' => 'Error: ' . $e->getMessage()
@@ -71,39 +60,37 @@ class ChestController extends Controller
             $request->validate([
                 'id' => 'required|integer',
                 'name_exercise' => 'required|string|max:100',
-                'description' => 'required|string', // Changed from deskripsi to description
-                'updated_date' => 'required|date',
+                'description' => 'required|string',
+                // updated_date will be set dynamically
                 'updated_by' => 'required|string|max:50',
-                'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Added gif and max size
+                'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
             $data = [
                 'name_exercise' => $request->name_exercise,
-                'description' => $request->description, // Changed from deskripsi to description
-                'updated_date' => $request->updated_date,
+                'description' => $request->description,
+                'updated_date' => Carbon::now(), // Update timestamp
                 'updated_by' => $request->updated_by,
             ];
 
             if ($request->hasFile('img')) {
-                // Hapus gambar lama
                 $old = DB::table('content')->where('id', $request->id)->first();
                 if ($old && $old->img && file_exists(public_path($old->img))) {
                     unlink(public_path($old->img));
                 }
 
-                // Simpan gambar baru
                 $file = $request->file('img');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('chest'), $filename);
-                $data['img'] = 'chest/' . $filename; // Store the full path relative to public
+                $file->move(public_path('chest'), $filename); // Move to 'chest' directory
+                $data['img'] = 'chest/' . $filename; // Store full path relative to public
             }
 
             DB::table('content')->where('id', $request->id)->update($data);
 
-            return redirect()->back()->with('success', 'Data berhasil diperbarui!');
+            return redirect()->back()->with('success', 'Chest exercise updated successfully!');
         } catch (\Exception $e) {
             \Log::error('Error updating chest exercise: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal update data: '.$e->getMessage());
+            return redirect()->back()->with('error', 'Failed to update chest exercise: '.$e->getMessage());
         }
     }
 
@@ -112,16 +99,17 @@ class ChestController extends Controller
             $id = $request->id;
 
             $record = DB::table('content')->where('id', $id)->first();
+            // Delete image from public/chest directory if it exists
             if ($record && $record->img && file_exists(public_path($record->img))) {
                 unlink(public_path($record->img));
             }
 
             DB::table('content')->where('id', $id)->delete();
 
-            return redirect()->back()->with('success', 'Data berhasil dihapus!');
+            return redirect()->back()->with('success', 'Chest exercise deleted successfully!');
         } catch (\Exception $e) {
             \Log::error('Error deleting chest exercise: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal menghapus data: '.$e->getMessage());
+            return redirect()->back()->with('error', 'Failed to delete chest exercise: '.$e->getMessage());
         }
     }
-}
+}   

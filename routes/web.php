@@ -7,6 +7,7 @@ use App\Http\Controllers\BackController;
 use App\Http\Controllers\ShoulderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ChestViewController;
 
 Route::get('/', function () {
     return view('index');
@@ -44,3 +45,6 @@ Route::get('/back_manage', [BackController::class,'read_back']);
 Route::post('/back_insert', [BackController::class,'insert_back']);
 Route::put('/back_update', [BackController::class,'update_back']); // Rute UPDATE untuk Back
 Route::post('/back_delete', [BackController::class,'delete_back']); // Tetap POST
+
+// User-facing Chest Exercises Route (New)
+Route::get('/exercises/chest', [ChestViewController::class, 'index']); // Rute untuk menampilkan latihan dada ke pengguna

@@ -74,4 +74,28 @@
         padding-top: 120px;
         padding-bottom: 50px;
     }
+    .home-hero-container{
+        background-image: url('/home-img/hero-home.jpg'); /* Hapus '/public' dari path */
+        opacity: 0.8;
+        background-size: cover; /* Gunakan background-size: cover; untuk object-fit pada background-image */
+        background-position: center center; /* Opsional: untuk posisi tengah */
+        background-repeat: no-repeat; /* Opsional: agar gambar tidak mengulang */
+        /* Pastikan juga elemen ini memiliki tinggi (height) agar background terlihat */
+        min-height: 500px; /* Contoh, sesuaikan sesuai kebutuhan */
+        h1{
+            margin-top: 50px;
+            background-color: white;
+            padding: 20px 50px 20px 50px;
+            opacity: 1;
+            color: rgba(255, 123, 0, 0.84);
+            border-radius: 20px;
+        }
+    }
+    .home-content-container{
+        padding-top: 50px;
+    }
+    .home-content-container .col{
+        display: d-flex;
+       
+    }
 }

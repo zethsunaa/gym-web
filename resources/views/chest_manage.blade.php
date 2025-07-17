@@ -32,11 +32,9 @@
                     </div>
 
                     <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
+                    <label for="description" class="form-label">Description</s>
                     <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                     </div>
-
-                    
 
                     <div class="mb-3">
                     <label for="categories" class="form-label">Categories</label>
@@ -68,8 +66,8 @@
                         <th scope="col">Created By</th>
                         <th scope="col">Updated Time</th>
                         <th scope="col">Updated By</th>
-                        <th scope="col" width="100">Image</th>
-                        <th scope="col">Actions</th> {{-- Added for Update/Delete buttons --}}
+                        <th scope="col">Image</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,15 +82,62 @@
                         <td>{{ $exercise->updated_by }}</td>
                         <td>
                             @if($exercise->img)
-                                {{-- Corrected image path, assuming 'img' column stores 'chest/filename.ext' --}}
                                 <img src="{{ asset($exercise->img) }}" alt="Image" width="200">
+                            @else
+                                No Image
                             @endif
                         </td>
                         <td>
-                            
-                            <button class="btn btn-sm btn-warning">Edit</button>
-                            <form action="/chest_delete" method="POST" style="display:inline;">
+                            {{-- Add Update and Delete buttons for Chest exercises --}}
+                            {{-- Update Button --}}
+                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{$exercise->id}}">
+                                Edit
+                            </button>
+
+                            {{-- Update Modal (specific to each exercise) --}}
+                            <div class="modal fade" id="editModal{{$exercise->id}}" tabindex="-1" aria-labelledby="editModalLabel{{$exercise->id}}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="{{ url('/chest_update') }}" method="POST" enctype="multipart/form-data" class="modal-content">
+                                        @csrf
+                                        @method('PUT') {{-- Use PUT method for update --}}
+                                        <input type="hidden" name="id" value="{{ $exercise->id }}">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="editModalLabel{{$exercise->id}}">Edit Chest Exercise</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="edit_name_exercise" class="form-label">Exercise Name</label>
+                                                <input type="text" class="form-control" id="edit_name_exercise" name="name_exercise" value="{{ $exercise->name_exercise }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="edit_description" class="form-label">Description</label>
+                                                <textarea class="form-control" id="edit_description" name="description" rows="3" required>{{ $exercise->description }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="edit_updated_by" class="form-label">Updated By</label>
+                                                <input type="text" class="form-control" id="edit_updated_by" name="updated_by" value="Admin" readonly> {{-- Or actual logged in user --}}
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="edit_img" class="form-label">Image (Leave blank to keep current)</label>
+                                                <input type="file" class="form-control" id="edit_img" name="img" accept="image/*">
+                                                @if($exercise->img)
+                                                    <img src="{{ asset($exercise->img) }}" alt="Current Image" width="50" class="mt-2">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Update Exercise</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            {{-- Delete Button (uses POST as per your web.php config) --}}
+                            <form action="{{ url('/chest_delete') }}" method="POST" style="display:inline;">
                                 @csrf
+                                {{-- @method('DELETE') <-- Do NOT use this if your route is POST --}}
                                 <input type="hidden" name="id" value="{{ $exercise->id }}">
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this exercise?')">Delete</button>
                             </form>
