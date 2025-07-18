@@ -17,7 +17,7 @@
     <div class="home-hero-container">
         {{-- Konten hero section bisa ditambahkan di sini, misalnya judul atau teks --}}
         <div class="container d-flex align-items-center justify-content-center" style="min-height: 400px;">
-            <h1 class="text-center">Our Chest Exercises</h1>
+            <h1 class="text-center">Our Shoulder Exercises</h1>
         </div>
     </div>
 
