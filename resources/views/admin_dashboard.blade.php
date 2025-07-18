@@ -12,7 +12,7 @@
     @extends('layout.navbar_admin_dashboard')
     <div class="container">
         <div class="dashboard-container justify-content-center align-items-center mx-auto">
-            <h1>Welcome, Admin Dashboard</h1>
+            <h1>Welcome, ' {{Session::get('user_name')}} ' to Dashboard</h1>
         </div>
     </div>
 </body>

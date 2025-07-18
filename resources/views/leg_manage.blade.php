@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     <title>Admin - Gym Len</title>
 </head>
@@ -34,6 +35,16 @@
                     <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="created_by" class="form-label">Created By</label>
+                    <input type="text" class="form-control" id="created_by" name="created_by" value="{{ session('user_name') }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="updated_by" class="form-label">Updated By</label>
+                    <input type="text" class="form-control" id="updated_by" name="updated_by" value="{{ session('user_name') }}" readonly>
                     </div>
 
                     <div class="mb-3">
@@ -116,7 +127,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="edit_updated_by" class="form-label">Updated By</label>
-                                                <input type="text" class="form-control" id="edit_updated_by" name="updated_by" value="Admin" readonly> {{-- Or actual logged in user --}}
+                                                <input type="text" class="form-control" id="edit_updated_by" name="updated_by" value="{{ session('user_name') }}" readonly> {{-- Or actual logged in user --}}
                                             </div>
                                             <div class="mb-3">
                                                 <label for="edit_img" class="form-label">Image (Leave blank to keep current)</label>
@@ -147,6 +158,10 @@
             </table>
         </div>
     </div>
+    <script>
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('edit_description');
+    </script>
     <script src="{{ url('js/main.js') }}"></script>
 </body>
 </html>

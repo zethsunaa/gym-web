@@ -34,7 +34,7 @@
             <div class="card-body">
               <h5 class="card-title">Shoulder</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="/exercises/shoulder" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
             <div class="card-body">
               <h5 class="card-title">Back</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="/exercises/back" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
             <div class="card-body">
               <h5 class="card-title">Leg</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="/exercises/leg" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
       </div>

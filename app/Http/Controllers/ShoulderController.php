@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Session;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -32,7 +33,7 @@ class ShoulderController extends Controller
         $file->move(public_path($tujuan_upload), $filename);
 
         $currentDateTime = Carbon::now();
-        $createdBy = 'Admin'; 
+        $createdBy = Session::get('user_name'); 
 
         DB::table('content')->insert([
             'name_exercise' => $request->name_exercise,

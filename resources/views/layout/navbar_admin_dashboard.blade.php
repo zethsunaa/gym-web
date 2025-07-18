@@ -21,6 +21,7 @@
           </ul>
         </li>
       </ul>
+          <a href="" class="nav-item">{{ session('user_name') }}</a>
      <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button class="btn btn-danger">Logout</button>

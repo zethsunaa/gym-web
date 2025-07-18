@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Session;
 use Illuminate\Http\Request;
 use Carbon\Carbon; // Import Carbon for current datetime
 
@@ -32,7 +33,7 @@ class LegController extends Controller
         $file->move(public_path($tujuan_upload), $filename);
 
         $currentDateTime = Carbon::now();
-        $createdBy = 'Admin'; // Replace with actual authenticated user
+        $createdBy = Session::get('user_name'); // Replace with actual authenticated user
 
         DB::table('content')->insert([
             'name_exercise' => $request->name_exercise,

@@ -38,6 +38,16 @@
                     </div>
 
                     <div class="mb-3">
+                    <label for="created_by" class="form-label">Created By</label>
+                    <input type="text" class="form-control" id="created_by" name="created_by" value="{{ session('user_name') }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="updated_by" class="form-label">Updated By</label>
+                    <input type="text" class="form-control" id="updated_by" name="updated_by" value="{{ session('user_name') }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
                     <label for="categories" class="form-label">Categories</label>
                     <input type="text" class="form-control" id="categories" name="categories" value="chest" readonly>
                     </div>
@@ -117,7 +127,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="edit_updated_by" class="form-label">Updated By</label>
-                                                <input type="text" class="form-control" id="edit_updated_by" name="updated_by" value="Admin" readonly> {{-- Or actual logged in user --}}
+                                                <input type="text" class="form-control" id="edit_updated_by" name="updated_by" value="{{ session('user_name') }}" readonly> {{-- Or actual logged in user --}}
                                             </div>
                                             <div class="mb-3">
                                                 <label for="edit_img" class="form-label">Image (Leave blank to keep current)</label>

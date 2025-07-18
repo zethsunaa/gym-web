@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon; // Import Carbon for current datetime
+use Session;
 
 class ChestController extends Controller
 {
@@ -32,7 +33,7 @@ class ChestController extends Controller
         $file->move(public_path($tujuan_upload), $filename);
 
         $currentDateTime = Carbon::now();
-        $createdBy = 'Admin'; // Replace with actual authenticated user or Auth::user()->name;
+        $createdBy = Session::get('user_name');; // Replace with actual authenticated user or Auth::user()->name;
 
         DB::table('content')->insert([
             'name_exercise' => $request->name_exercise,
